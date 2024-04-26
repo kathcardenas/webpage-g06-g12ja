@@ -1,9 +1,11 @@
-
+import NavBar from "./Components/NavBar"
 
 function App() {
   return (
     <>
-    <h1>Junior Achievement Tarea</h1>
+    <main className="dark text-foreground bg-background">
+      <NavBar/>
+    </main>
     </>
   );
 }
