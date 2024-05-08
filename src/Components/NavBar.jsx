@@ -7,7 +7,7 @@ export default function App() {
   const location = useLocation();
 
   return (
-    <Navbar classNames={{
+    <Navbar isBordered classNames={{
         item: [
           "flex",
           "relative",
@@ -31,11 +31,6 @@ export default function App() {
             INICIO
           </Link>
         </NavbarItem>
-        <NavbarItem isActive={location.pathname === "/sobre-nosotros"}>
-          <Link color="foreground" href="/sobre-nosotros">
-              QUIENES SOMOS
-          </Link>
-        </NavbarItem>
         <NavbarItem isActive={location.pathname === "/peliculas"}>
           <Link color="foreground" href="/peliculas">
             PELICULAS
@@ -44,6 +39,11 @@ export default function App() {
         <NavbarItem isActive={location.pathname === "/series"}>
           <Link color="foreground" href="/series">
             SERIES
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive={location.pathname === "/sobre-nosotros"}>
+          <Link color="foreground" href="/sobre-nosotros">
+              QUIENES SOMOS
           </Link>
         </NavbarItem>
       </NavbarContent>

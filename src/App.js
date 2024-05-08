@@ -3,7 +3,7 @@ import Peliculas from "./Components/Pages/Movies"
 import Series from "./Components/Pages/Series"
 import Home from "./Components/Pages/Home"
 import About from "./Components/Pages/About"
-
+import Footer from "./Components/Footer"
 import {useNavigate, Route, Routes} from 'react-router-dom';
 import {NextUIProvider} from '@nextui-org/react';
 
@@ -15,13 +15,14 @@ function App() {
     <NextUIProvider navigate={navigate}>
       <main className="dark text-foreground bg-background">
         <NavBar/>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/peliculas" element={<Peliculas />} />
+          <Route path="/series" element={<Series />} />
+          <Route path="/sobre-nosotros" element={<About />} />
+        </Routes>
+        <Footer/>
       </main>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/peliculas" element={<Peliculas />} />
-        <Route path="/series" element={<Series />} />
-        <Route path="/sobre-nosotros" element={<About />} />
-      </Routes>
     </NextUIProvider>
     </>
   );

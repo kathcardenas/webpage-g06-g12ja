@@ -14,6 +14,10 @@ export default function App() {
         <div><CardMovies/></div>
         <div><CardMovies/></div>
         <div><CardMovies/></div>
+        <div><CardMovies/></div>
+        <div><CardMovies/></div>
+        <div><CardMovies/></div>
+        <div><CardMovies/></div>
       </div>
     </div>
     </>
