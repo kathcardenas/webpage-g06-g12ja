@@ -1,13 +1,22 @@
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link} from "@nextui-org/react";
+import Logo from "../assets/Images/logo.png";
+import {Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link} from "@nextui-org/react";
 import { useLocation } from "react-router-dom";
-
+import "../styles/Navbar.css";
 
 export default function App() {
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const menuItems = [
+    {title: "Inicio", link: "/" },
+    {title: "Películas", link: "/peliculas" },
+    {title: "Series", link: "/series" },
+    {title: "Nosotros", link: "/sobre-nosotros" },
+  ];
 
   return (
-    <Navbar isBordered classNames={{
+    <Navbar isBordered isBlurred={false} classNames={{
         item: [
           "flex",
           "relative",
@@ -22,31 +31,38 @@ export default function App() {
           "data-[active=true]:after:rounded-[2px]",
           "data-[active=true]:after:bg-primary",
         ],
-      }}>
-      <NavbarBrand className="sm:flex gap-4 p-8" justify="center">
+      }}
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}>
+      <NavbarBrand className="navbar-leftSide">
+            <img src={Logo} alt="Logo de la aplicación"></img>
       </NavbarBrand>
-      <NavbarContent className="sm:flex gap-4" justify="center">
-      <NavbarItem isActive={location.pathname === "/"}>
-          <Link color="foreground" href="/">
-            INICIO
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive={location.pathname === "/peliculas"}>
-          <Link color="foreground" href="/peliculas">
-            PELICULAS
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive={location.pathname === "/series"}>
-          <Link color="foreground" href="/series">
-            SERIES
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive={location.pathname === "/sobre-nosotros"}>
-          <Link color="foreground" href="/sobre-nosotros">
-              QUIENES SOMOS
-          </Link>
-        </NavbarItem>
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        {menuItems.map((item, index) => (
+          <NavbarItem key={`${item.title}-${index}`} isActive={location.pathname === item.link}>
+            <Link color="foreground" className="navbar-rightSide" href={item.link}>
+              {item.title}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
+      <NavbarContent className="sm:hidden" justify="start">
+        <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
+      </NavbarContent>
+      <NavbarMenu>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item.title}-${index}`}>
+            <Link
+              className="w-full"
+              color={index === 2 ? "blue" : index === menuItems.length - 1 ? "blue" : "foreground"}
+              href={item.link}
+              size="lg"
+            >
+              {item.title}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
     </Navbar>
   );
 }

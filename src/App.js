@@ -1,11 +1,13 @@
-import NavBar from "./Components/NavBar"
 import Peliculas from "./Components/Pages/Movies"
 import Series from "./Components/Pages/Series"
-import Home from "./Components/Pages/Home"
 import About from "./Components/Pages/About"
-import Footer from "./Components/Footer"
+import NavBar from "./Components/NavBar";
+import Footer from "./Components/Footer";
+import Home from "./Components/Pages/Home";
+
 import {useNavigate, Route, Routes} from 'react-router-dom';
 import {NextUIProvider} from '@nextui-org/react';
+import "./App.css";
 
 function App() {
   const navigate = useNavigate();
