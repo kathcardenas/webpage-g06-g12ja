@@ -1,10 +1,22 @@
 
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
 
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 function App() {
   return (
-    <>
-    <h1>Junior Achievement Tarea, vamos a morir como caballeros o vencermos</h1>
-    </>
+    <div className="App">
+      <Router>
+          <Navbar />
+          <Routes>
+          <Route path='/' element={<Home/>} />
+          </Routes>
+          <Footer />
+      </Router>
+  
+    </div>
   );
 }
 
