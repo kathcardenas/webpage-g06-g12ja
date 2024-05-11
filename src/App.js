@@ -7,7 +7,7 @@ import {useNavigate, Route, Routes} from 'react-router-dom';
 import {NextUIProvider} from '@nextui-org/react';
 import "./App.css";
  import React from 'react';
- import Nosotros1 from './Components/Pages/Nosotros1';
+ import About from './Components/Pages/About';
 
 
  function App() {
@@ -22,7 +22,7 @@ import "./App.css";
           <Route path="/" element={<Home />} />
           <Route path="/peliculas" element={<Peliculas />} />
           <Route path="/series" element={<Series />} />
-          <Route path="/sobre-nosotros" element={<Nosotros1 />} />
+          <Route path="/sobre-nosotros" element={<About />} />
         </Routes>
         <Footer/>
       </main>
