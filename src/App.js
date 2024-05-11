@@ -1,10 +1,13 @@
+ 
+ import React from 'react';
+ import Nosotros1 from './componentes/Nosotros1';
 
 
-function App() {
+ function App() {
   return (
-    <>
-    <h1>Junior Achievement Tarea</h1>
-    </>
+      <div className="App">
+          <Nosotros1/>
+      </div>
   );
 }
 
