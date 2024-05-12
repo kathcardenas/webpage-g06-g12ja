@@ -15,6 +15,10 @@ export default function App() {
     {title: "Nosotros", link: "/sobre-nosotros" },
   ];
 
+  const handleLinkClick = () => {
+    setIsMenuOpen(false); // Cerrar el menú al hacer clic en un enlace
+  };
+
   return (
     <Navbar isBordered isBlurred={false} classNames={{
         item: [
@@ -41,7 +45,7 @@ export default function App() {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {menuItems.map((item, index) => (
           <NavbarItem key={`${item.title}-${index}`} isActive={location.pathname === item.link}>
-            <Link color="foreground" className="navbar-rightSide" href={item.link}>
+            <Link color="foreground" className="navbar-rightSide" href={item.link} onClick={handleLinkClick}>
               {item.title}
             </Link>
           </NavbarItem>
@@ -58,6 +62,7 @@ export default function App() {
               color={index === 2 ? "blue" : index === menuItems.length - 1 ? "blue" : "foreground"}
               href={item.link}
               size="lg"
+              onClick={handleLinkClick}
             >
               {item.title}
             </Link>
