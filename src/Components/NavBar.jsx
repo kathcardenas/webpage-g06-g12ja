@@ -36,6 +36,7 @@ export default function App() {
       onMenuOpenChange={setIsMenuOpen}>
       <NavbarBrand className="navbar-leftSide">
             <img src={Logo} alt="Logo de la aplicación"></img>
+            <h1 className="font-semibold">HongisMovie</h1>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {menuItems.map((item, index) => (

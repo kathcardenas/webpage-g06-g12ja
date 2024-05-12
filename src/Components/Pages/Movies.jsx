@@ -6,7 +6,7 @@ export default function App() {
     <div className="flex justify-center p-8">
       <h1 className="font-bold text-2xl">PELÍCULAS</h1>
     </div>
-    <div className="px-4 pb-4">
+    <div className="px-4 pb-4 flex justify-center">
       <div className="grid grid-cols-4 gap-4">
         <div><CardMovies/></div>
         <div><CardMovies/></div>
