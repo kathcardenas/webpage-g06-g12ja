@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {Card, CardHeader, CardBody, Image} from "@nextui-org/react";
 import {Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, CircularProgress} from "@nextui-org/react";
+import { format, parseISO } from 'date-fns';
+import { es } from 'date-fns/locale';
+
 
 
 export default function App({idMovie=0}) {
@@ -53,6 +56,14 @@ export default function App({idMovie=0}) {
     onOpen();
   }
 
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = parseISO(dateString);
+    return `${format(date, 'dd MMMM \'del\' yyyy', { locale: es })}`;
+  };
+  
+
+
   return (
     <>
     <div className="flex flex-wrap gap-3">
@@ -62,7 +73,7 @@ export default function App({idMovie=0}) {
             <>
               <ModalHeader className="flex flex-col gap-1 text-white">{movie.title}</ModalHeader>
               <ModalBody className="text-white pb-8">
-                <h4>Fecha estreno: {movie.release_date}</h4>
+                <h4>Estrenada el {formatDate(movie.release_date)} ({movie.origin_country})</h4>
                 <h4>Origen: {movie.origin_country}</h4>
                 <h4>Genero: {movie.genres.map(genre=>genre.name).join(', ')}</h4>
                 <h4>Duración: {movie.runtime + " minutos."}</h4>
@@ -78,7 +89,7 @@ export default function App({idMovie=0}) {
         <CardHeader className="pb-0 pt-2 px-6 grid grid-cols-1 lg:grid-cols-3 text-left">
           <div className="col-start-1 lg:col-span-3">
             <p className="text-tiny uppercase font-bold">{movie.title}</p>
-            <small className="text-default-500">{movie.release_date}</small>
+            <small className="text-default-500">{formatDate(movie.release_date)}</small>
           </div>
           <CircularProgress
             className="row-start-1 col-start-4 col-span-2 place-self-center"
@@ -93,7 +104,6 @@ export default function App({idMovie=0}) {
             color="primary"
             showValueLabel={true}
           />
-
         </CardHeader>
         <CardBody className="overflow-visible py-2 flex justify-center">
           <div className="">
