@@ -1,6 +1,29 @@
+import { useEffect, useState} from "react";
+import {Pagination} from "@nextui-org/react";
 import CardMovies from "../CardMovies"
 
 export default function App() {
+  //Declarando estado inicial del hook
+  const [movies, setMovies] = useState([])
+  const [page, setPage] = useState(1)
+
+  useEffect(() => {
+    const url = `https://api.themoviedb.org/3/movie/popular?language=es-ES&page=${page}`;
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjg1MmYyNTI3MzU4ZWI3YWI4NjZkYWE0MzZlN2RmZiIsInN1YiI6IjY2MTIwODNlYjA5YmRlMDE2NGJjZTc4ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9nPTrotRetu0PUJkXNVgIbyDffu1OmYo6F7UuldsXLA'
+      }
+    };
+
+    fetch(url, options)
+    .then(res => res.json())
+    .then(json => {setMovies(json.results)}) //areglo de las 20 películas por página
+    .catch(err => console.error('error:' + err));
+  }, [page])//Siempre va mostrar la página 1
+  //Solo interesa cuando carga el componente
+
   return (
     <>
     <div className="flex justify-center p-8">
@@ -8,17 +31,11 @@ export default function App() {
     </div>
     <div className="px-4 pb-4 flex justify-center">
       <div className="grid grid-cols-4 gap-4">
-        <div><CardMovies/></div>
-        <div><CardMovies/></div>
-        <div><CardMovies/></div>
-        <div><CardMovies/></div>
-        <div><CardMovies/></div>
-        <div><CardMovies/></div>
-        <div><CardMovies/></div>
-        <div><CardMovies/></div>
-        <div><CardMovies/></div>
-        <div><CardMovies/></div>
+        {movies && (movies.map((movie) => <CardMovies key={movie.id} idMovie={movie.id}/>))}
       </div>
+    </div>
+    <div>
+      <Pagination showControls total={10} initialPage={page} onChange={(newPage) => setPage(newPage)}/>
     </div>
     </>
  
