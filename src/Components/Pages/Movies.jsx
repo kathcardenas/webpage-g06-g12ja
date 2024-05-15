@@ -30,7 +30,7 @@ export default function App() {
       <h1 className="font-bold text-2xl">PELÍCULAS</h1>
     </div>
     <div className="px-4 pb-4 flex justify-center">
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {movies && (movies.map((movie) => <CardMovies key={movie.id} idMovie={movie.id}/>))}
       </div>
     </div>

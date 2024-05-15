@@ -29,7 +29,7 @@ export default function App({idMovie=0}) {
   };
     fetch(url, options)
     .then(res => res.json())
-    .then(json => {setMovie(json); handleCast(json.credits.cast, json.credits.crew)})
+    .then(json => {console.log(json);setMovie(json); handleCast(json.credits.cast, json.credits.crew)})
     .catch(err => console.error('error:' + err));
   }, [idMovie])//Si el id cambia, hace el consumo de nuevo
 
@@ -74,27 +74,29 @@ export default function App({idMovie=0}) {
           )}
         </ModalContent>
       </Modal>
-      <Card className="py-4" isPressable onPress={() => handleOpen()}>
-        <CardHeader className="pb-0 pt-2 px-12 flex-col items-start">
-          <p className="text-tiny uppercase font-bold">{movie.title}</p>
-          <small className="text-default-500">{movie.release_date}</small>
+      <Card className="max-w-64 py-4" isPressable onPress={() => handleOpen()}>
+        <CardHeader className="pb-0 pt-2 px-6 grid grid-cols-1 lg:grid-cols-3 text-left">
+          <div className="col-start-1 lg:col-span-3">
+            <p className="text-tiny uppercase font-bold">{movie.title}</p>
+            <small className="text-default-500">{movie.release_date}</small>
+          </div>
           <CircularProgress
-          className="row-start-1 col-start-4 col-span-2 place-self-center"
-          label="Vote"
-          size="lg"
-          value={movie.vote_average*10}
-          formatOptions={{ 
-              style: "decimal",
-              minimumFractionDigits: 1, // Mínimo número de dígitos fraccionarios
-              maximumFractionDigits: 1 // Máximo número de dígitos fraccionarios
-          }}
-          color="primary"
-          showValueLabel={true}
-    />
+            className="row-start-1 col-start-4 col-span-2 place-self-center"
+            label=" "
+            size="lg"
+            value={movie.vote_average*10}
+            formatOptions={{ 
+                style: "percent",
+                minimumFractionDigits: 1, // Mínimo número de dígitos fraccionarios
+                maximumFractionDigits: 1 // Máximo número de dígitos fraccionarios
+            }}
+            color="primary"
+            showValueLabel={true}
+          />
 
         </CardHeader>
-        <CardBody className="overflow-visible py-2">
-          <div className="grid justify-center">
+        <CardBody className="overflow-visible py-2 flex justify-center">
+          <div className="">
             <Image
               alt="Card background"
               className="object-cover rounded-xl"
