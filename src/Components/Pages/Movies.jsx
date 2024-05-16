@@ -1,6 +1,7 @@
 import { useEffect, useState} from "react";
-import {Pagination} from "@nextui-org/react";
+import Pagination from "../Pagination";
 import CardMovies from "../CardMovies"
+
 
 export default function App() {
   //Declarando estado inicial del hook
@@ -19,10 +20,14 @@ export default function App() {
 
     fetch(url, options)
     .then(res => res.json())
-    .then(json => {setMovies(json.results)}) //areglo de las 20 películas por página
+    .then(json => {setMovies(json.results); window.scrollTo(0, 0);}) //areglo de las 20 películas por página
     .catch(err => console.error('error:' + err));
   }, [page])//Siempre va mostrar la página 1
   //Solo interesa cuando carga el componente
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
 
   return (
     <>
@@ -34,8 +39,8 @@ export default function App() {
         {movies && (movies.map((movie) => <CardMovies key={movie.id} idMovie={movie.id}/>))}
       </div>
     </div>
-    <div>
-      <Pagination showControls total={10} initialPage={page} onChange={(newPage) => setPage(newPage)}/>
+    <div className="flex justify-end p-8">
+      <Pagination  page={page} onPageChange={handlePageChange}/>
     </div>
     </>
  

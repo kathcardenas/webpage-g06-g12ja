@@ -4,10 +4,9 @@ import {Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, CircularProg
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 
-
-
 export default function App({idMovie=0}) {
   const image_path = 'https://images.tmdb.org/t/p/original'
+  var countries = require("i18n-iso-countries");
 
   /* AQUÍ ES PARA VER LOS ESTADOS DEL COMPONENTE MODAL*/
   const {isOpen, onOpen, onClose} = useDisclosure();
@@ -32,7 +31,7 @@ export default function App({idMovie=0}) {
   };
     fetch(url, options)
     .then(res => res.json())
-    .then(json => {console.log(json);setMovie(json); handleCast(json.credits.cast, json.credits.crew)})
+    .then(json => {setMovie(json); handleCast(json.credits.cast, json.credits.crew)})
     .catch(err => console.error('error:' + err));
   }, [idMovie])//Si el id cambia, hace el consumo de nuevo
 
@@ -59,27 +58,45 @@ export default function App({idMovie=0}) {
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const date = parseISO(dateString);
-    return `${format(date, 'dd MMMM \'del\' yyyy', { locale: es })}`;
+    return `${format(date, 'dd \'de\' MMMM \'del\' yyyy', { locale: es })}`;
   };
-  
 
+  //
+  const countryName = (countryCode) => {
+    countries.registerLocale(require("i18n-iso-countries/langs/es.json"));
+    const countryCodeString = Array.isArray(countryCode) ? countryCode[0] : countryCode;
+    const countryName=countries.getName(countryCodeString, "es");
+    return countryName || 'Desconocido';
+
+  };
 
   return (
     <>
     <div className="flex flex-wrap gap-3">
-    <Modal backdrop={backdrop} isOpen={isOpen} onClose={onClose} className="bg-black">
+    <Modal backdrop={backdrop} isOpen={isOpen} onClose={onClose} classNames={{
+          body: "py-6",
+          backdrop: "bg-foreground-900/50 backdrop-opacity-40",
+          base: "border-gray-800 bg-foreground",
+          header: "border-b-[1px] border-[#292f46]",
+        }}
+        >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-white">{movie.title}</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1 text-white">
+                {movie.title}
+                <small className="text-default-300">Estrenada el {formatDate(movie.release_date)} en {countryName(movie.origin_country)}.</small>
+              </ModalHeader>
               <ModalBody className="text-white pb-8">
-                <h4>Estrenada el {formatDate(movie.release_date)} ({movie.origin_country})</h4>
-                <h4>Origen: {movie.origin_country}</h4>
-                <h4>Genero: {movie.genres.map(genre=>genre.name).join(', ')}</h4>
-                <h4>Duración: {movie.runtime + " minutos."}</h4>
-                <h2>Descripción General: {movie.overview}</h2>
-                <h4>{crewMovie.length>1 ? "Directores" : "Director"}: {crewMovie.map(crew=>crew.name).join(', ')}</h4>
-                <h4>{castMovie.length>1 ? "Actores" : "Actor/Actriz"}: {castMovie.map(cast=>cast.name).join(', ')}</h4>
+                <div className="text-default-300">
+                  <h4>{movie.genres.length > 1 ? "Géneros" : "Género"}: {movie.genres.map(genre=>genre.name).join(', ')}</h4>
+                  <h4>Duración: {movie.runtime + " minutos."}</h4>
+                </div>
+                <h2 className="text-justify">Descripción General:<span className="text-blue-400"> {movie.overview}</span></h2>
+                <div className="grid grid-cols-2 text-default-300">
+                  <h4>{castMovie.length>1 ? "Actores" : "Actor/Actriz"}: {castMovie.map(cast=>cast.name).join(', ')}</h4>
+                  <h4 className="pl-2">{crewMovie.length>1 ? "Directores" : "Director"}: {crewMovie.map(crew=>crew.name).join(', ')}</h4>
+                </div>
               </ModalBody>
             </>
           )}
@@ -93,9 +110,9 @@ export default function App({idMovie=0}) {
           </div>
           <CircularProgress
             className="row-start-1 col-start-4 col-span-2 place-self-center"
-            label=" "
+            aria-label="Loading..."
             size="lg"
-            value={movie.vote_average*10}
+            value={(movie.vote_average != null) ? movie.vote_average * 10 : 0}
             formatOptions={{ 
                 style: "percent",
                 minimumFractionDigits: 1, // Mínimo número de dígitos fraccionarios
@@ -108,7 +125,7 @@ export default function App({idMovie=0}) {
         <CardBody className="overflow-visible py-2 flex justify-center">
           <div className="">
             <Image
-              alt="Card background"
+              alt={"Poster de la película "+movie.title}
               className="object-cover rounded-xl"
               src={movie.poster_path?image_path+movie.poster_path:" "}
               width={270}
