@@ -42,8 +42,7 @@ export default function App() {
     <div className="flex justify-end p-8">
       <Pagination  page={page} onPageChange={handlePageChange}/>
     </div>
-    </>
- 
+    </> 
   );
 }
 
