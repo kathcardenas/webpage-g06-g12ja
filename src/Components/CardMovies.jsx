@@ -88,8 +88,8 @@ export default function App({idMovie=0}) {
                 </div>
                 <h4 className="">Descripción General:<span className="text-blue-400"> {movie.overview.trim() || "No disponible"}</span></h4>
                 <div className="grid grid-cols-2 text-default-300">
-                  <p>{castMovie.length>1 ? "Actores" : "Actor/Actriz"}: {castMovie.map(cast=>cast.name).join(', ')}</p>
-                  <p className="pl-2">{crewMovie.length>1 ? "Directores" : "Director/Directora"}: {crewMovie.map(crew=>crew.name).join(', ')}</p>
+                  <p>Reparto: {castMovie.map(cast=>cast.name).join(', ')}</p>
+                  <p className="pl-2">Dirección: {crewMovie.map(crew=>crew.name).join(', ')}</p>
                 </div>
                 <div className="grid grid-cols-2">
                     {playing ? (
@@ -126,7 +126,6 @@ export default function App({idMovie=0}) {
                                 <FaYoutube />
                               </Button>
                             </div>
-                          
                           ):(<div>
                             <h1>Trailer: {trailerMovie !== undefined ? trailerMovie.name : "No disponible"}</h1>
                           </div>
