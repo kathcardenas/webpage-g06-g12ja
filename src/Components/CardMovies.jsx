@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import YouTube from "react-youtube";
-import {Card, CardHeader, CardBody, Image, Button, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, CircularProgress} from "@nextui-org/react";
-import { format, parseISO } from 'date-fns';
-import { es } from 'date-fns/locale';
-import { FaYoutube, FaWindowClose } from "react-icons/fa";
+import {Button, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure} from "@nextui-org/react";
+import { FaYoutube, FaWindowClose } from "react-icons/fa"
+import Card from "./Card"
+import { formatDate, countryName } from "../js/functions"
 
 export default function App({idMovie=0}) {
   const image_path = 'https://images.tmdb.org/t/p/original'
-  var countries = require("i18n-iso-countries");
 
   //Estado del modal
   const {isOpen, onOpen, onClose} = useDisclosure();
@@ -40,17 +39,18 @@ export default function App({idMovie=0}) {
 
   //Como se maneja cada array del cast y el crew, para traer actores y directores
   const handleCredits = (cast,crew) => {
-    var array = []
-    for (var i = 0; i < 2; i++) {
-      array.push(cast[i])
-    }
-    setCastMovie(array)
+    const castArray = cast && cast.length > 0 ? cast.slice(0, 2) : []
+    const crewArray = crew && crew.length > 0 ? crew.slice(0, 1) : []
 
-    array=[]
-    for (i = 0; i < 1; i++) {
-      array.push(crew[i])
+    setCastMovie(castArray)
+    setCrewMovie(crewArray)
+
+    if (!castArray.length) {
+      setCastMovie([{ name: "No disponible" }])
     }
-    setCrewMovie(array)
+    if (!crewArray.length) {
+      setCrewMovie([{ name: "No disponible" }])
+    }
   }
 
    const handleVideos = (results) => {
@@ -63,19 +63,6 @@ export default function App({idMovie=0}) {
     setBackdrop(backdrop)
     onOpen()
   }
-
-  const formatDate = (dateString) => {
-    if (!dateString) return '';
-    const date = parseISO(dateString);
-    return `${format(date, 'dd \'de\' MMMM \'del\' yyyy', { locale: es })}`;
-  };
-
-  const countryName = (countryCode) => {
-    countries.registerLocale(require("i18n-iso-countries/langs/es.json"));
-    const countryCodeString = Array.isArray(countryCode) ? countryCode[0] : countryCode;
-    const countryName=countries.getName(countryCodeString, "es");
-    return countryName || 'Desconocido';
-  };
 
   return (
     <>
@@ -92,17 +79,17 @@ export default function App({idMovie=0}) {
             <>
               <ModalHeader className="flex flex-col gap-1 text-white">
                 {movie.title}
-                <small className="text-default-300">Estrenada el {formatDate(movie.release_date)} en {countryName(movie.origin_country)}</small>
+                <small className="text-default-300">Estrenada el {formatDate(movie.release_date) || "No disponible"} en {countryName(movie.origin_country) || "No Disponible"}</small>
               </ModalHeader>
               <ModalBody className="text-white pb-8">
                 <div className="text-default-300 grid grid-cols-2">
-                  <h4>{movie.genres.length > 1 ? "Géneros:" : "Género:"} {movie.genres.map(genre=>genre.name).join(', ')}</h4>
-                  <h4>Duración: {movie.runtime + " minutos"}</h4>
+                <p>{movie.genres.length > 0 ? (movie.genres.length > 1 ? "Géneros:" : "Género:") : "Género:"} {movie.genres.length > 0 ? movie.genres.map(genre => genre.name).join(', ') : "No disponible"}</p>
+                <p>Duración: {movie.runtime !== 0 ? movie.runtime + " minutos" : "No disponible"}</p>
                 </div>
-                <h4 className="">Descripción General:<span className="text-blue-400"> {movie.overview}</span></h4>
+                <h4 className="">Descripción General:<span className="text-blue-400"> {movie.overview.trim() || "No disponible"}</span></h4>
                 <div className="grid grid-cols-2 text-default-300">
-                  <h4>{castMovie.length>1 ? "Actores:" : "Actor/Actriz"}: {castMovie.map(cast=>cast.name).join(', ')}</h4>
-                  <h4 className="pl-2">{crewMovie.length>1 ? "Directores" : "Director"}: {crewMovie.map(crew=>crew.name).join(', ')}</h4>
+                  <p>{castMovie.length>1 ? "Actores" : "Actor/Actriz"}: {castMovie.map(cast=>cast.name).join(', ')}</p>
+                  <p className="pl-2">{crewMovie.length>1 ? "Directores" : "Director/Directora"}: {crewMovie.map(crew=>crew.name).join(', ')}</p>
                 </div>
                 <div className="grid grid-cols-2">
                     {playing ? (
@@ -122,7 +109,7 @@ export default function App({idMovie=0}) {
                           iv_load_policy: 0,
                           modestbranding: 0,
                           rel: 0,
-                          shoinfo: 0,
+                          showinfo: 0,
                         },
                       }}           
                     />
@@ -152,37 +139,11 @@ export default function App({idMovie=0}) {
           )}
         </ModalContent>
       </Modal>
-      <Card className="max-w-64 py-4" isPressable onPress={() => handleOpen()}>
-        <CardHeader className="pb-0 pt-2 px-6 grid grid-cols-1 lg:grid-cols-3 text-left">
-          <div className="col-start-1 lg:col-span-3">
-            <p className="text-tiny uppercase font-bold">{movie.title}</p>
-            <small className="text-default-500">{formatDate(movie.release_date)}</small>
-          </div>
-          <CircularProgress
-            className="row-start-1 col-start-4 col-span-2 place-self-center"
-            aria-label="Loading..."
-            size="lg"
-            value={(movie.vote_average != null) ? movie.vote_average * 10 : 0}
-            formatOptions={{ 
-                style: "percent",
-                minimumFractionDigits: 1, // Mínimo número de dígitos fraccionarios
-                maximumFractionDigits: 1 // Máximo número de dígitos fraccionarios
-            }}
-            color="primary"
-            showValueLabel={true}
-          />
-        </CardHeader>
-        <CardBody className="overflow-visible py-2 flex justify-center">
-          <div className="">
-            <Image
-              alt={"Poster de la película "+movie.title}
-              className="object-cover rounded-xl"
-              src={movie.poster_path?image_path+movie.poster_path:" "}
-              width={270}
-            />
-          </div>
-        </CardBody>
-      </Card> 
+      <Card
+        data={movie}
+        image_path={image_path}
+        handleOpen={handleOpen}
+      />
       </div>
     </> 
   );

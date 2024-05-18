@@ -1,15 +1,25 @@
 import { useEffect, useState} from "react";
 import Pagination from "../Pagination";
 import CardMovies from "../CardMovies"
+import Search from "../Search/Search"
 
+const DEFAULT_PAGE = 1
 
 export default function App() {
   //Declarando estado inicial del hook
   const [movies, setMovies] = useState([])
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(DEFAULT_PAGE)
+  const [totalPages, setTotalPages] = useState()
+
+  //busqueda
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
-    const url = `https://api.themoviedb.org/3/movie/popular?language=es-ES&page=${page}`;
+    let url = `https://api.themoviedb.org/3/movie/popular?language=es-ES&page=${page}`
+    if (search) {
+      url = `https://api.themoviedb.org/3/search/movie?query=${search}&language=es-ES&page=${page}`
+    }
+
     const options = {
       method: 'GET',
       headers: {
@@ -20,28 +30,57 @@ export default function App() {
 
     fetch(url, options)
     .then(res => res.json())
-    .then(json => {setMovies(json.results); window.scrollTo(0, 0);}) //areglo de las 20 películas por página
+    .then(json => {
+      setTotalPages(json.total_pages);
+      setMovies(json.results); 
+      window.scrollTo(0, 0);}) //areglo de las 20 películas por página
     .catch(err => console.error('error:' + err));
-  }, [page])//Siempre va mostrar la página 1
+  }, [page, search])//Siempre va mostrar la página 1
   //Solo interesa cuando carga el componente
 
   const handlePageChange = (newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
+
+  const handleSearch = (e) =>{
+    setSearch(e.target.value)
+    setPage(DEFAULT_PAGE)
+  }
+
+  const handleMovieClick = (id) =>{
+
+  }
 
   return (
     <>
     <div className="flex justify-center p-8">
       <h1 className="font-bold text-2xl">PELÍCULAS</h1>
     </div>
+    <Search search={search} setSearch={setSearch} handleSearch={handleSearch} setPage={setPage} />
     <div className="px-4 pb-4 flex justify-center">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-        {movies && (movies.map((movie) => <CardMovies key={movie.id} idMovie={movie.id}/>))}
+        {movies.length === 0 ? (
+          <p className="text-xl font-bold pb-4">Película no encontrada</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {movies.map((data) => (
+              <CardMovies
+                key={data.id}
+                idMovie={data.id}
+                onClick={() => handleMovieClick(data.id)}
+              />
+            ))}
+          </div>
+        )}
       </div>
-    </div>
-    <div className="flex justify-end p-8">
-      <Pagination  page={page} onPageChange={handlePageChange}/>
-    </div>
+      {movies.length > 0 && (
+        <div className="flex justify-end p-8">
+          <Pagination
+            page={page}
+            totalPagination={search ? totalPages : 10}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      )}
     </> 
   );
 }
