@@ -3,7 +3,7 @@ import YouTube from "react-youtube";
 import {Button, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure} from "@nextui-org/react";
 import { FaYoutube, FaWindowClose } from "react-icons/fa"
 import Card from "./Card"
-import { formatDate, countryName } from "../js/functions"
+import { formatDate, countryName } from "../../js/functions"
 
 export default function App({idMovie=0}) {
   const image_path = 'https://images.tmdb.org/t/p/original'

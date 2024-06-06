@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Pagination from "../Pagination";
-import CardSeries from "../CardSeries"
+import Pagination from "../Search/Pagination";
+import CardSeries from "../Cards/CardSeries"
 import Search from "../Search/Search"
 
 const DEFAULT_PAGE = 1
@@ -27,7 +27,7 @@ export default function App() {
     
     fetch(url, options)
       .then(res => res.json())
-      .then(json => {console.log(json.results); 
+      .then(json => { 
         setTotalPages(json.total_pages);
         setSeries(json.results);
         window.scrollTo(0, 0);})

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, useDisclosure} from "@nextui-org/react";
 import Card from "./Card"
-import { formatDate, countryName } from "../js/functions"
+import { formatDate, countryName } from "../../js/functions"
 
 export default function App({idSerie}) {
   const image_path = 'https://images.tmdb.org/t/p/original'
