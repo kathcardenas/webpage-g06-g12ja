@@ -2,7 +2,7 @@ import React from "react";
 import {Input} from "@nextui-org/react";
 import {SearchIcon} from "./SearchIcon";
 
-export default function App({search, handleSearch, setPage, setSearch}) {
+export default function App({search, handleSearch, setPage, setSearch,dataType}) {
   return (
     <div className="px-20 pb-8 rounded-2xl text-white shadow-lg">
       <Input
@@ -29,7 +29,7 @@ export default function App({search, handleSearch, setPage, setSearch}) {
             "!cursor-text",
           ],
         }}
-        placeholder="Buscar película..."
+        placeholder={dataType === "movie" ? "Buscar película...":"Buscar serie..."}
         value={search}
         onChange={handleSearch}
         onClear={() => {setSearch("");setPage(1)}}

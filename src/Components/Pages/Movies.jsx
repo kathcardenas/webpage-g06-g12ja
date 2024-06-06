@@ -13,6 +13,8 @@ export default function App() {
 
   //busqueda
   const [search, setSearch] = useState("")
+  const dataType = 'movie'; // O 'serie', según corresponda
+
 
   useEffect(() => {
     let url = `https://api.themoviedb.org/3/movie/popular?language=es-ES&page=${page}`
@@ -56,7 +58,7 @@ export default function App() {
     <div className="flex justify-center p-8">
       <h1 className="font-bold text-2xl">PELÍCULAS</h1>
     </div>
-    <Search search={search} setSearch={setSearch} handleSearch={handleSearch} setPage={setPage} />
+    <Search search={search} setSearch={setSearch} handleSearch={handleSearch} setPage={setPage} dataType={dataType}/>
     <div className="px-4 pb-4 flex justify-center">
         {movies.length === 0 ? (
           <p className="text-xl font-bold pb-4">Película no encontrada</p>

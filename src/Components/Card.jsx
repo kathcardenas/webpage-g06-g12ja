@@ -10,20 +10,24 @@ export default function App({data,image_path,handleOpen}) {
       <Card className="max-w-64 py-4 shadow hover:shadow-sky-500/40" isPressable onPress={() => handleOpen()}>
         <CardHeader className="pb-0 pt-2 px-6 grid grid-cols-1 lg:grid-cols-3 text-left">
           <div className="col-start-1 lg:col-span-3">
-            <div>{data.title ? (
-              <p className="text-tiny uppercase font-bold">{data.title}</p>
+            <div>{data.title || data.name ? (
+              <p className="text-tiny uppercase font-bold">{data.title || data.name}</p>
             ):(
               <Skeleton className="rounded-lg">
                 <div className="pt-2 rounded-lg bg-default-300"></div>
               </Skeleton>
             )}</div>
-            <div>{data.release_date ? (
-              <small className="text-default-500">{formatDate(data.release_date)}</small>
-            ): (
-              <Skeleton className="rounded-lg">
-                <div className="pt-2 rounded-lg bg-default-300"></div>
-              </Skeleton>
-            )}</div>
+            <div>
+              {data.first_air_date || data.release_date ? (
+                <small className="text-default-500">
+                  {formatDate(data.first_air_date || data.release_date)}
+                </small>
+              ) : (
+                <Skeleton className="rounded-lg">
+                  <div className="pt-2 rounded-lg bg-default-300"></div>
+                </Skeleton>
+              )}
+            </div>
           </div>
           <CircularProgress
             className="row-start-1 col-start-4 col-span-2 place-self-center"

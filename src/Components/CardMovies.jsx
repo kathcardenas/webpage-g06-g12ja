@@ -86,7 +86,7 @@ export default function App({idMovie=0}) {
                 <p>{movie.genres.length > 0 ? (movie.genres.length > 1 ? "Géneros:" : "Género:") : "Género:"} {movie.genres.length > 0 ? movie.genres.map(genre => genre.name).join(', ') : "No disponible"}</p>
                 <p>Duración: {movie.runtime !== 0 ? movie.runtime + " minutos" : "No disponible"}</p>
                 </div>
-                <h4 className="">Descripción General:<span className="text-blue-400"> {movie.overview.trim() || "No disponible"}</span></h4>
+                <p className="text-justify">Descripción General:<span className="text-blue-400"> {movie.overview.trim() || "No disponible"}</span></p>
                 <div className="grid grid-cols-2 text-default-300">
                   <p>Reparto: {castMovie.map(cast=>cast.name).join(', ')}</p>
                   <p className="pl-2">Dirección: {crewMovie.map(crew=>crew.name).join(', ')}</p>
