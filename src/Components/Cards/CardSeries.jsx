@@ -32,7 +32,7 @@ export default function App({idSerie}) {
         
         fetch(url, options)
           .then(res => res.json())
-          .then(json => {console.log(json);setSerie(json);handleCredits(json.credits.crew,json.credits.cast)})
+          .then(json => {setSerie(json);handleCredits(json.credits.crew,json.credits.cast)})
           .catch(err => console.error('error:' + err));
        
         }, [idSerie])
