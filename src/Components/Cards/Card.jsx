@@ -1,6 +1,6 @@
 import React from "react";
 import {Card, Skeleton, CardHeader, CardBody, Image, CircularProgress} from "@nextui-org/react";
-import { formatDate } from "../js/functions"
+import { formatDate } from "../../js/functions"
 
 
 export default function App({data,image_path,handleOpen}) {

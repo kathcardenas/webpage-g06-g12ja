@@ -1,6 +1,6 @@
 import { useEffect, useState} from "react";
-import Pagination from "../Pagination";
-import CardMovies from "../CardMovies"
+import Pagination from "../Search/Pagination";
+import CardMovies from "../Cards/CardMovies"
 import Search from "../Search/Search"
 
 const DEFAULT_PAGE = 1
