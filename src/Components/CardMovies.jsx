@@ -33,7 +33,7 @@ export default function App({idMovie=0}) {
   };
     fetch(url, options)
     .then(res => res.json())
-    .then(json => {setMovie(json); handleCredits(json.credits.cast, json.credits.crew); handleVideos(json.videos.results)})
+    .then(json => {console.log(json);setMovie(json); handleCredits(json.credits.cast, json.credits.crew); handleVideos(json.videos.results)})
     .catch(err => console.error('error:' + err));
   }, [idMovie])//Si el id cambia, hace el consumo de nuevo
 
