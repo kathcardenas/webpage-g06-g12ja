@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, useDisclosure} from "@nextui-org/react";
+import YouTube from "react-youtube"; 
+import {Button, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure} from "@nextui-org/react";
+import { FaYoutube, FaWindowClose } from "react-icons/fa"
 import Card from "./Card"
 import { formatDate, countryName } from "../../js/functions"
 
@@ -11,6 +13,8 @@ export default function App({idSerie}) {
   const [backdrop, setBackdrop] = React.useState('opaque')
        const [crewSerie, setCrewSerie] = useState({})
        const [castSerie, setCastSerie] = useState({})
+       const [trailerSerie, setTrailerSerie] = useState(null)
+  const [playing, setPlaying] = useState(false);
 
 
   const handleOpen = (backdrop) => {
@@ -32,7 +36,7 @@ export default function App({idSerie}) {
         
         fetch(url, options)
           .then(res => res.json())
-          .then(json => {setSerie(json);handleCredits(json.credits.crew,json.credits.cast)})
+          .then(json => {setSerie(json);handleCredits(json.credits.crew,json.credits.cast);handleVideos(json.videos.results)})
           .catch(err => console.error('error:' + err));
        
         }, [idSerie])
@@ -49,6 +53,13 @@ export default function App({idSerie}) {
             setCastSerie([{name: "No disponible"}])
            }
         }
+        const handleVideos = (results) => {
+          var ultimoElemento = results.length > 0 ? results[results.length - 1] : undefined;
+          setTrailerSerie(ultimoElemento);
+        }
+      
+      
+        
         
   return (
     <>
@@ -75,6 +86,48 @@ export default function App({idSerie}) {
                 <div className="grid grid-cols-2 text-default-300">
                   <p>Reparto: {castSerie.map(cast=>cast.name).join(', ')}</p>
                   <p className="pl-2">Dirección: {crewSerie.map(crew=>crew.name).join(', ')}</p>
+                </div>
+                <div className="grid grid-cols-2">
+                    {playing ? (
+                      <>
+                      <YouTube
+                      videoId={trailerSerie.key}
+                      iframeClassName="h-80 w-84"
+                      className="row-start-3 col-span-2"
+                      opts={{
+                        width: "100%",
+                        height: "100%",
+                        playerVars: {
+                          autoplay: 1,
+                          constrols: 0,
+                          cc_load_policy: 0,
+                          fs: 0,
+                          iv_load_policy: 0,
+                          modestbranding: 0,
+                          rel: 0,
+                          showinfo: 0,
+                        },
+                      }}           
+                    />
+                    <div className="col-start-1 row-start-2 py-2">
+                      <Button color="danger" variant="light" size="sm" className="font-bold" onClick={() => setPlaying(false)}><FaWindowClose></FaWindowClose></Button>
+                    </div>
+                    </>
+                    ):(
+                      <div>
+                          {trailerSerie ? (
+                            <div className="text-default-300 row-start-1">
+                              Trailer: {trailerSerie.name+" "}
+                              <Button color="primary" variant="light" size="sm" className="font-bold" onClick={()=>setPlaying(true)}>
+                                <FaYoutube />
+                              </Button>
+                            </div>
+                          ):(<div>
+                            <h1>Trailer: {trailerSerie !== undefined ? trailerSerie.name : "No disponible"}</h1>
+                          </div>
+                          )}
+                      </div>
+                    )}
                 </div>
               </ModalBody>
             </>
