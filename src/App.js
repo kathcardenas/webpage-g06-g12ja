@@ -20,7 +20,7 @@ import About from './Components/Pages/About';
       <main className="dark text-foreground bg-background">
         <NavBar/>
         <Routes>
-        <Route path="*" element={<Error404 />} />
+          <Route path='*' element={<Error404 />} />
           <Route path="/webpage-g06-g12ja" element={<Home />} />
           <Route path="/peliculas" element={<Peliculas />} />
           <Route path="/series" element={<Series />} />

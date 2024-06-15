@@ -34,10 +34,13 @@ Puedes obtener mayor información en [running tests](https://facebook.github.io/
 
 Para crear la aplición en producción puedes hacerlo con `npm run build`
 Esto creará la aplicación para producción en la carpeta `build`.\
-Esto incluye rect en modo producción y optimiza la complicación para obtener mejor rendimiento.
+Esto incluye react en modo producción y optimiza la complicación para obtener mejor rendimiento.
 
 La compilación está minimizada y los nombres de archivos de los hashes.\
 Puedes obtener mayor información en [deployment](https://facebook.github.io/create-react-app/docs/deployment).
+
+## Despliegue con github pages
+Para desplegarla utilizando el servidor que nos proporciona github puedes hacer con `npm install --save-dev gh-pages` para crear la rama de despliegue, seguido de `npm run build` y `npm run deploy` para optimizar el despliegue.
 
 ## Colaboradores
 Agradecimientos especiales a todos los que han contribuido a este proyecto:
