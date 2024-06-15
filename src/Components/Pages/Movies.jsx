@@ -61,7 +61,7 @@ export default function App() {
     <Search search={search} setSearch={setSearch} handleSearch={handleSearch} setPage={setPage} dataType={dataType}/>
     <div className="px-4 pb-4 flex justify-center">
         {movies.length === 0 ? (
-          <p className="text-xl font-bold pb-4">Película no encontrada</p>
+          <p className="text-xl font-bold pb-4 h-screen justify-center content-center">Película no encontrada</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {movies.map((data) => (

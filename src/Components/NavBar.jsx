@@ -51,15 +51,15 @@ export default function App() {
           </NavbarItem>
         ))}
       </NavbarContent>
-      <NavbarContent className="sm:hidden" justify="start">
+      <NavbarContent className="sm:hidden bg-dark" justify="start">
         <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
       </NavbarContent>
-      <NavbarMenu>
+      <NavbarMenu className="bg-black">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item.title}-${index}`}>
             <Link
               className="w-full"
-              color={index === 2 ? "blue" : index === menuItems.length - 1 ? "blue" : "foreground"}
+              color={index === 0 ? "blue" : index === menuItems.length - 1 ? "blue" : "blue"}
               href={item.link}
               size="lg"
               onClick={handleLinkClick}

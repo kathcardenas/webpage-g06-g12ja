@@ -11,7 +11,7 @@ module.exports = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     
   ],
- 
+  darkMode: ['selector', '[data-mode="dark"]'],
   theme: {
     extend: {
       
