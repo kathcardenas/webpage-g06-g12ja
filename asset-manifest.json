@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/webpage-g06-g12ja/static/css/main.8573baa9.css",
+    "main.js": "/webpage-g06-g12ja/static/js/main.101a6e0d.js",
+    "static/media/peli.jpg": "/webpage-g06-g12ja/static/media/peli.b0e6c22eda02daf6cd75.jpg",
+    "static/media/logo.png": "/webpage-g06-g12ja/static/media/logo.b1954f39272282b2f189.png",
+    "index.html": "/webpage-g06-g12ja/index.html",
+    "main.8573baa9.css.map": "/webpage-g06-g12ja/static/css/main.8573baa9.css.map",
+    "main.101a6e0d.js.map": "/webpage-g06-g12ja/static/js/main.101a6e0d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8573baa9.css",
+    "static/js/main.101a6e0d.js"
+  ]
+}
