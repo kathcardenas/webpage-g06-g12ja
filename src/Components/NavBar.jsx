@@ -9,7 +9,7 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
-    {title: "Inicio", link: "/" },
+    {title: "Inicio", link: "/webpage-g06-g12ja" },
     {title: "Películas", link: "/peliculas" },
     {title: "Series", link: "/series" },
     {title: "Nosotros", link: "/sobre-nosotros" },

@@ -4,7 +4,7 @@ Este es un proyecto integrador realizado para el programa **MUJER DIGITAL** de [
  
 Está basado en [React](https://github.com/facebook/create-react-app) y la librería [NEXT UI](https://nextui.org) junto a [Tailwind](https://tailwindcss.com). La aplicación utiliza la API de películas [TMDB](https://www.themoviedb.org) para mostrar las películas y series puplares, facilitando la búsqueda y el acceso a la información esencial de cada una.
 
-Puedes navegar en la aplicación [AQUÍ](https://kathcardenas.github.io).
+Puedes navegar en la aplicación [AQUÍ](https://kathcardenas.github.io/webpage-g06-g12ja).
 
 ## Instalación
 Como requisito previo debes instalar [Node JS](https://nodejs.org/en) y utilizar el editor de texto de tu preferencia.\

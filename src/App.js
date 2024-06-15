@@ -19,7 +19,7 @@ import "./App.css";
       <main className="dark text-foreground bg-background">
         <NavBar/>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/webpage-g06-g12ja" element={<Home />} />
           <Route path="/peliculas" element={<Peliculas />} />
           <Route path="/series" element={<Series />} />
           <Route path="/sobre-nosotros" element={<About />} />
