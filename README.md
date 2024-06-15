@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# HONGUISMOVIE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este es un proyecto integrador realizado para el programa **MUJER DIGITAL** de [Junior Acvhievement El Salvador](https://jaelsalvador.org). 
+ 
+Está basado en [React](https://github.com/facebook/create-react-app) y la librería [NEXT UI](https://nextui.org) junto a [Tailwind](https://tailwindcss.com). La aplicación utiliza la API de películas [TMDB](https://www.themoviedb.org) para mostrar las películas y series puplares, facilitando la búsqueda y el acceso a la información esencial de cada una.
 
-## Available Scripts
+## Instalación
+Como requisito previo debes instalar [Node JS](https://nodejs.org/en) y utilizar el editor de texto de tu preferencia.\
+Instrucciones sobre cómo instalar el proyecto:
 
-In the project directory, you can run:
+### Clona el repositorio
+git clone https://github.com/kathcardenas/webpage-g06-g12ja.git
 
-### `npm start`
+### Ingresa al directorio del proyecto
+cd proyecto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Instalar las dependencias
+Puedes instalarlas con `npm install`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Iniciar la aplicación
+Puedes correr la aplicación en modo desarrollo con `npm start`
 
-### `npm test`
+### Abre la aplicación en el navegador
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.\
+La página recargará con cada cambio que realices.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Ver errores
+Es posible ver errores en la consola con `npm test`
+Puedes obtener mayor información en [running tests](https://facebook.github.io/create-react-app/docs/running-tests).
 
-### `npm run build`
+## Aplicación en producción 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Para crear la aplición en producción puedes hacerlo con `npm run build`
+Esto creará la aplicación para producción en la carpeta `build`.\
+Esto incluye rect en modo producción y optimiza la complicación para obtener mejor rendimiento.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+La compilación está minimizada y los nombres de archivos de los hashes.\
+Puedes obtener mayor información en [deployment](https://facebook.github.io/create-react-app/docs/deployment).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Colaboradores
+Agradecimientos especiales a todos los que han contribuido a este proyecto:
+- [Katherine Cárdenas](https://github.com/kathcardenas)
+- [Sara Esteban](https://github.com/Sarasdlpz)
+- [Marcela Cuevas](https://github.com/marcelaSaggeth06)
+- Patricia Estrada
+- [Katherine Merino](https://github.com/gabykm)
 
-### `npm run eject`
+## Librerías
+Para desarrollar el proyecto se utilizaron las siguientes librerías:
+1. [NEXT UI](https://nextui.org): para la creación de los componentes
+2. [react-dom](https://www.npmjs.com/package/react-dom): para renderizar direcciones
+3. [date-fns](https://date-fns.org): manipular fechas con facilidad
+4. [i18n-iso-countries](https://www.npmjs.com/package/i18n-iso-countries): obtener el nombre de países según ISO 3166-1 Alpha-2, Alpha-3 o Numeric code
+5. [react-youtube](https://www.npmjs.com/package/react-youtube): componente para utilizar el reproductor IFrame de Youtube 
+6. [react-icons](https://react-icons.github.io/react-icons/) y [mui/icons-materials](https://www.npmjs.com/package/@mui/icons-material): para integrar iconos a las interfaces
+7. [Tailwind](https://tailwindcss.com): trabaja en conjunto a NEXT UI como framework de CSS
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
